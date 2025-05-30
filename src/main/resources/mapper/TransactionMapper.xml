@@ -1,0 +1,20 @@
+<mapper namespace="com.ncusoft.myapplication7.mapper.TransactionMapper">
+    <select id="getTransactionsByUserId" resultType="com.ncusoft.myapplication7.entity.Transaction">
+        SELECT * FROM transactions WHERE user_id = #{userId} ORDER BY timestamp DESC
+    </select>
+    <insert id="addTransaction" parameterType="com.ncusoft.myapplication7.entity.Transaction">
+        INSERT INTO transactions (user_id, type, amount, note, timestamp)
+        VALUES (#{userId}, #{type}, #{amount}, #{note}, #{timestamp})
+    </insert>
+    <select id="searchTransactions" resultType="com.ncusoft.myapplication7.entity.Transaction">
+        SELECT * FROM transactions
+        WHERE user_id = #{userId}
+        <if test="type != null">AND type = #{type}</if>
+        <if test="note != null and note != ''">AND note LIKE CONCAT('%', #{note}, '%')</if>
+        <if test="year != null">AND YEAR(timestamp) = #{year}</if>
+        <if test="month != null">AND MONTH(timestamp) = #{month}</if>
+        <if test="day != null">AND DAY(timestamp) = #{day}</if>
+        <if test="amount != null">AND amount = #{amount}</if>
+        ORDER BY timestamp DESC
+    </select>
+</mapper>

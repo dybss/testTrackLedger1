@@ -2,10 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_dialog_email"
-    android:title="首页" />
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="首页"/>
+    <item
+        android:id="@+id/nav_chart"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="图表"/>
+    <item
+        android:id="@+id/nav_calendar"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="日期"/>
     <item
         android:id="@+id/nav_my"
-        android:icon="@android:drawable/ic_menu_my_calendar"
-    android:title="我的" />
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="我的"/>
 </menu>
