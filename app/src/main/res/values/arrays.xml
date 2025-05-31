@@ -1,0 +1,6 @@
+<resources>
+    <string-array name="chart_type">
+        <item>按月（日收支）</item>
+        <item>按年（月收支）</item>
+    </string-array>
+</resources>

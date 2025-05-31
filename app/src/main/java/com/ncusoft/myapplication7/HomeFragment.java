@@ -77,6 +77,21 @@ public class HomeFragment extends Fragment {
         incomeButton.setOnClickListener(v -> addTransaction(Transaction.TYPE_INCOME));
         expenseButton.setOnClickListener(v -> addTransaction(Transaction.TYPE_EXPENSE));
         searchButton.setOnClickListener(v -> searchTransactions());
+
+        // 新增：监听搜索栏内容变化，清空时自动显示全部内容
+        searchEditText.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() == 0) {
+                    // 自动恢复全部内容
+                    transactionAdapter.setTransactions(new ArrayList<>(originalTransactions));
+                }
+            }
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
     }
 
     private void loadTransactions() {
@@ -166,7 +181,10 @@ public class HomeFragment extends Fragment {
             jsonBody.put("type", type);
             jsonBody.put("amount", amount);
             jsonBody.put("note", note);
-            // 服务器timestamp可选，若不传则用服务器当前时间
+            // 新增：传递当前时间字符串
+            String now = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault())
+                    .format(new java.util.Date());
+            jsonBody.put("timestamp", now);
         } catch (JSONException e) {
             showToast("数据异常");
             return;
@@ -208,9 +226,39 @@ public class HomeFragment extends Fragment {
             transactionAdapter.setTransactions(new ArrayList<>(originalTransactions));
             return;
         }
-        // 构造GET参数
+
         StringBuilder urlBuilder = new StringBuilder("/transactions/search?userId=" + userId);
-        urlBuilder.append("&note=").append(keyword);
+
+        boolean matched = false;
+        // 年份 yyyy
+        if (keyword.matches("^\\d{4}$")) {
+            urlBuilder.append("&year=").append(keyword);
+            matched = true;
+        }
+        // 年月 yyyy-MM
+        else if (keyword.matches("^\\d{4}-\\d{1,2}$")) {
+            String[] parts = keyword.split("-");
+            urlBuilder.append("&year=").append(parts[0]);
+            urlBuilder.append("&month=").append(Integer.parseInt(parts[1]));
+            matched = true;
+        }
+        // 年月日 yyyy-MM-dd
+        else if (keyword.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$")) {
+            String[] parts = keyword.split("-");
+            urlBuilder.append("&year=").append(parts[0]);
+            urlBuilder.append("&month=").append(Integer.parseInt(parts[1]));
+            urlBuilder.append("&day=").append(Integer.parseInt(parts[2]));
+            matched = true;
+        }
+        // 金额（整数或小数）
+        else if (keyword.matches("^\\d+(\\.\\d+)?$")) {
+            urlBuilder.append("&amount=").append(keyword);
+            matched = true;
+        }
+        // 备注模糊搜索
+        if (!matched) {
+            urlBuilder.append("&note=").append(keyword);
+        }
 
         new Thread(() -> {
             try {
