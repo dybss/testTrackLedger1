@@ -1,6 +1,7 @@
 package com.ncusoft.myapplication7;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,11 +45,10 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initViews(view);
 
-        // 获取userId
-        Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            userId = intent.getIntExtra("userId", -1);
-        }
+        // 优先从SharedPreferences获取userId
+        SharedPreferences sp = getActivity().getSharedPreferences("user_prefs", getActivity().MODE_PRIVATE);
+        userId = sp.getInt("userId", -1);
+
         if (userId != -1) {
             loadTransactions();
         }

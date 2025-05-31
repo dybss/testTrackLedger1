@@ -2,6 +2,7 @@ package com.ncusoft.myapplication7;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -61,11 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            intent.putExtra("userId", userId); // 传递 user_id
-                                            startActivity(intent);
-                                            finish();
+                                            onLoginSuccess(userId);
                                         }
                                     });
                                 } else {
@@ -127,5 +124,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void onLoginSuccess(int userId) {
+        // 登录成功后保存userId
+        SharedPreferences sp = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        sp.edit().putInt("userId", userId).apply();
+
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

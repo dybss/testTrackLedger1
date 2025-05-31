@@ -1,6 +1,7 @@
 package com.ncusoft.myapplication7;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -31,11 +32,9 @@ public class MyFragment extends Fragment {
         btnSaveProfile = view.findViewById(R.id.btn_save_profile);
         btnEditProfile = view.findViewById(R.id.btn_edit_profile);
 
-        // 获取userId
-        Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            userId = intent.getIntExtra("userId", -1);
-        }
+        // 优先从SharedPreferences获取userId
+        SharedPreferences sp = getActivity().getSharedPreferences("user_prefs", getActivity().MODE_PRIVATE);
+        userId = sp.getInt("userId", -1);
 
         // 可选：初始化用户名显示
         // usernameText.setText(...);

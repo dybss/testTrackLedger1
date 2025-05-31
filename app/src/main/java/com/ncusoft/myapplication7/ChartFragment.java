@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
+import android.content.SharedPreferences;
 
 public class ChartFragment extends Fragment {
     private Spinner spinnerYear, spinnerMonth;
@@ -28,10 +29,9 @@ public class ChartFragment extends Fragment {
         spinnerMonth = view.findViewById(R.id.spinner_month);
         lineChart = view.findViewById(R.id.line_chart);
 
-        Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            userId = intent.getIntExtra("userId", -1);
-        }
+        // 优先从SharedPreferences获取userId，保证每次都能拿到
+        SharedPreferences sp = getActivity().getSharedPreferences("user_prefs", getActivity().MODE_PRIVATE);
+        userId = sp.getInt("userId", -1);
 
         // 初始化年份和月份
         initYearMonthSpinners();
