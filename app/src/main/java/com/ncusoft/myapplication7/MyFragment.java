@@ -1,7 +1,11 @@
 package com.ncusoft.myapplication7;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,13 +17,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import android.graphics.Paint;
 
 public class MyFragment extends Fragment {
     private TextView usernameText;
     private EditText etNewUsername, etNewPassword, etConfirmPassword;
     private Button btnSaveProfile, btnEditProfile;
+    private ImageView avatarImageView;
     private int userId = -1;
+    private static final int REQUEST_CODE_PICK_IMAGE = 1001;
 
     @Nullable
     @Override
@@ -32,6 +42,7 @@ public class MyFragment extends Fragment {
         etConfirmPassword = view.findViewById(R.id.et_confirm_password); // 新增
         btnSaveProfile = view.findViewById(R.id.btn_save_profile);
         btnEditProfile = view.findViewById(R.id.btn_edit_profile);
+        avatarImageView = view.findViewById(R.id.avatar); // 用原有id，兼容布局
 
         // 优先从SharedPreferences获取userId和用户名
         SharedPreferences sp = getActivity().getSharedPreferences("user_prefs", getActivity().MODE_PRIVATE);
@@ -40,6 +51,9 @@ public class MyFragment extends Fragment {
         if (!TextUtils.isEmpty(username)) {
             usernameText.setText(username);
         }
+
+        // 加载本地头像
+        loadLocalAvatar();
 
         btnSaveProfile.setOnClickListener(v -> {
             String newUsername = etNewUsername.getText().toString().trim();
@@ -69,7 +83,57 @@ public class MyFragment extends Fragment {
             btnSaveProfile.setVisibility(View.VISIBLE);
         });
 
+        // 在 onCreateView 里设置头像点击事件
+        avatarImageView.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
+        });
+
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            Uri imageUri = data.getData();
+            if (imageUri != null && getContext() != null) {
+                try (InputStream inputStream = getContext().getContentResolver().openInputStream(imageUri)) {
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    if (bitmap != null) {
+                        avatarImageView.setImageBitmap(bitmap); // 直接设置原图，交给ImageView的scaleType处理
+                        saveAvatarToLocal(bitmap);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "头像设置失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    private void saveAvatarToLocal(Bitmap bitmap) {
+        if (getContext() == null || bitmap == null || userId == -1) return;
+        File file = new File(getContext().getFilesDir(), "avatar_" + userId + ".png");
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLocalAvatar() {
+        if (getContext() == null || userId == -1) return;
+        File file = new File(getContext().getFilesDir(), "avatar_" + userId + ".png");
+        if (file.exists()) {
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            if (bitmap != null) {
+                avatarImageView.setImageBitmap(bitmap);
+            }
+        } else {
+            avatarImageView.setImageResource(android.R.drawable.ic_menu_myplaces); // 用系统自带默认头像
+        }
     }
 
     private void updateProfile(String newUsername, String newPassword) {

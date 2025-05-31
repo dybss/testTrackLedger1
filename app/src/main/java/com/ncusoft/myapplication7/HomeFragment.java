@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment {
                                 transactionAdapter.setTransactions(transactions);
                                 DecimalFormat df = new DecimalFormat("+¥#.00;-¥#.00");
                                 incomeTextView.setText(df.format(income[0]));
-                                expenseTextView.setText(df.format(expense[0]));
+                                expenseTextView.setText(df.format(expense[0].negate())); // 支出显示为负数
                                 balanceTextView.setText(df.format(balance));
                             });
                         }
