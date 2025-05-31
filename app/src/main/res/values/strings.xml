@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">My Application7</string>
-    <string name="toolbar_title">新的导航栏标题</string>
+    <string name="toolbar_title">收支记录</string>
     <string name="func_gallery">11</string>
     <string name="agree_terms">我已阅读   <u>协议内容</u></string>
     <string name="terms_content">

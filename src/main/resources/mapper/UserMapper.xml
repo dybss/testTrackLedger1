@@ -1,0 +1,11 @@
+<mapper namespace="com.ncusoft.myapplication7.mapper.UserMapper">
+    <select id="findByUsername" resultType="com.ncusoft.myapplication7.entity.User">
+        SELECT * FROM user WHERE username = #{username}
+    </select>
+    <select id="existsByUsername" resultType="int">
+        SELECT COUNT(*) FROM user WHERE username = #{username}
+    </select>
+    <insert id="register" parameterType="com.ncusoft.myapplication7.entity.User">
+        INSERT INTO user (username, password) VALUES (#{username}, #{password})
+    </insert>
+</mapper>

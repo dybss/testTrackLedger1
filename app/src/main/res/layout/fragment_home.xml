@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
-
-    <!-- 添加Toolbar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:background="@color/background"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    android:orientation="vertical">
 
     <!-- 顶部统计信息 -->
     <LinearLayout
@@ -37,25 +26,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
-        <TextView
-            android:id="@+id/balance_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥0.00"
-            android:textSize="36sp"
-            android:textColor="@android:color/white"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="16dp"/>
-
             <TextView
+                android:id="@+id/balance_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3月"
-                android:textSize="18sp"
-                android:layout_marginLeft="150dp"
+                android:text="¥0.00"
+                android:textSize="36sp"
                 android:textColor="@android:color/white"
                 android:fontFamily="sans-serif-medium"
                 android:layout_marginBottom="16dp"/>
+
 
         </LinearLayout>
 
@@ -151,35 +131,39 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transactions_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="260dp"
         android:layout_weight="1"
-        android:padding="8dp"/>
+        android:padding="8dp" />
 
     <!-- 底部输入栏 -->
+
+    <!-- Fragment容器 -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@android:color/white"
+        android:layout_marginTop="1dp"
         android:elevation="4dp"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/amount_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:hint="金额"
                 android:inputType="numberDecimal"
                 android:padding="12dp"
-                android:textSize="16sp"
-                android:layout_marginEnd="8dp"/>
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/note_edit_text"
@@ -188,7 +172,7 @@
                 android:layout_weight="2"
                 android:hint="备注"
                 android:padding="12dp"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -201,26 +185,33 @@
                 android:id="@+id/income_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="收入"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
-                android:background="@color/income"
-                android:padding="12dp"
                 android:layout_marginEnd="8dp"
-                android:fontFamily="sans-serif-medium"/>
+                android:layout_weight="1"
+                android:background="@color/income"
+                android:fontFamily="sans-serif-medium"
+                android:padding="12dp"
+                android:text="收入"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/expense_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="支出"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
                 android:background="@color/expense"
+                android:fontFamily="sans-serif-medium"
                 android:padding="12dp"
-                android:fontFamily="sans-serif-medium"/>
+                android:text="支出"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
 </LinearLayout>
