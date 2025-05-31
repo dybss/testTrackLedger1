@@ -52,6 +52,17 @@
             android:background="@drawable/bg_edit_rounded"
             android:padding="12dp"
             android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/et_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="确认新密码"
+            android:inputType="textPassword"
+            android:background="@drawable/bg_edit_rounded"
+            android:padding="12dp"
+            android:textSize="16sp"
             android:layout_marginBottom="18dp"/>
 
         <Button

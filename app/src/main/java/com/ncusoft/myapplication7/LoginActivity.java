@@ -58,11 +58,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (success) {
                                     int userId = jsonResponse.getInt("userId"); // 获取 user_id
+                                    // 新增：获取用户名
+                                    String loginUsername = jsonResponse.has("username") ? jsonResponse.getString("username") : username;
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                                            onLoginSuccess(userId);
+                                            onLoginSuccess(userId, loginUsername);
                                         }
                                     });
                                 } else {
@@ -126,10 +128,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void onLoginSuccess(int userId) {
-        // 登录成功后保存userId
+    // 修改onLoginSuccess，保存用户名
+    private void onLoginSuccess(int userId, String username) {
         SharedPreferences sp = getSharedPreferences("user_prefs", MODE_PRIVATE);
-        sp.edit().putInt("userId", userId).apply();
+        sp.edit().putInt("userId", userId)
+                .putString("username", username)
+                .apply();
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

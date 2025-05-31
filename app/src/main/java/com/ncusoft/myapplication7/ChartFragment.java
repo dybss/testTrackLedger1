@@ -100,7 +100,7 @@ public class ChartFragment extends Fragment {
             try {
                 String response = HttpUtils.sendGetRequest(url);
                 if (response != null) {
-                    org.json.JSONArray arr = new org.json.JSONArray(response);
+                    JSONArray arr = new JSONArray(response);
                     final List<Float> yList = new ArrayList<>();
                     final List<String> xLabels = new ArrayList<>();
                     int xCount;
@@ -109,7 +109,7 @@ public class ChartFragment extends Fragment {
                         xCount = 31;
                         float[] dayAmount = new float[xCount];
                         for (int i = 0; i < arr.length(); i++) {
-                            org.json.JSONObject obj = arr.getJSONObject(i);
+                            JSONObject obj = arr.getJSONObject(i);
                             int day = obj.optInt("day", 0);
                             float amount = (float) obj.optDouble("totalAmount", 0);
                             if (day > 0 && day <= xCount) {
@@ -125,7 +125,7 @@ public class ChartFragment extends Fragment {
                         xCount = 12;
                         float[] monthAmount = new float[xCount];
                         for (int i = 0; i < arr.length(); i++) {
-                            org.json.JSONObject obj = arr.getJSONObject(i);
+                            JSONObject obj = arr.getJSONObject(i);
                             int m = obj.optInt("month", 0);
                             float amount = (float) obj.optDouble("totalAmount", 0);
                             if (m > 0 && m <= xCount) {
@@ -142,9 +142,24 @@ public class ChartFragment extends Fragment {
                             lineChart.setDataWithLabels(yList, xLabels);
                         });
                     }
+                } else {
+                    // 建议加提示
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(() -> 
+                            android.widget.Toast.makeText(getContext(), "暂无数据", android.widget.Toast.LENGTH_SHORT).show()
+                        );
+                        // 清空图表
+                        lineChart.setDataWithLabels(new ArrayList<>(), new ArrayList<>());
+                    }
                 }
             } catch (Exception e) {
-                // 可加Toast提示
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> 
+                        android.widget.Toast.makeText(getContext(), "加载图表失败", android.widget.Toast.LENGTH_SHORT).show()
+                    );
+                    // 清空图表
+                    lineChart.setDataWithLabels(new ArrayList<>(), new ArrayList<>());
+                }
             }
         }).start();
     }

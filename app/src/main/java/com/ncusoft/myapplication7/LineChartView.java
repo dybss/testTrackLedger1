@@ -61,7 +61,7 @@ public class LineChartView extends View {
             return;
         }
         int w = getWidth(), h = getHeight();
-        int paddingLeft = 80; // 缩小左侧padding
+        int paddingLeft = 80;
         int paddingBottom = 50;
         int paddingTop = 30;
         int paddingRight = 30;
@@ -81,11 +81,28 @@ public class LineChartView extends View {
         canvas.drawLine(paddingLeft, h - paddingBottom, w - paddingRight, h - paddingBottom, axisPaint);
         canvas.drawLine(paddingLeft, paddingTop, paddingLeft, h - paddingBottom, axisPaint);
 
-        // 画y轴刻度和数值（间隔缩小，最多显示6位数，科学计数法显示极大极小数）
+        // 计算0值在原始坐标中的y
+        float zeroY = (h - paddingBottom + paddingTop) / 2f;
+
+        // 画y=0红色参考线在中心
+        canvas.drawLine(paddingLeft, zeroY, w - paddingRight, zeroY, zeroLinePaint);
+
+        // 画折线（将0映射到中心，正负对称）
+        float valueRange = Math.max(Math.abs(max), Math.abs(min));
+        float displayMin = -valueRange, displayMax = valueRange;
+        float lastX = 0, lastY = 0; // 修正：声明lastX/lastY
+        for (int i = 0; i < incomeData.size(); i++) {
+            float x = paddingLeft + (w - paddingLeft - paddingRight) * i / (count - 1);
+            float y = zeroY - (h - paddingTop - paddingBottom) / 2 * (incomeData.get(i) / valueRange);
+            if (i > 0) canvas.drawLine(lastX, lastY, x, y, incomePaint);
+            lastX = x; lastY = y;
+        }
+
+        // 画y轴刻度和数值（0在中心，正负对称）
         int ySteps = 6;
         for (int i = 0; i <= ySteps; i++) {
-            float y = h - paddingBottom - (h - paddingTop - paddingBottom) * i / ySteps;
-            float value = min + (max - min) * i / ySteps;
+            float value = displayMax - (displayMax - displayMin) * i / ySteps;
+            float y = zeroY - (h - paddingTop - paddingBottom) / 2 * (value / valueRange);
             canvas.drawLine(paddingLeft - 8, y, paddingLeft, y, axisPaint);
             String valueStr;
             if (Math.abs(value) >= 1000000 || Math.abs(value) < 0.01) {
@@ -107,19 +124,6 @@ public class LineChartView extends View {
             canvas.drawLine(x, h - paddingBottom, x, h - paddingBottom + 8, axisPaint);
             String label = xLabels.get(i);
             canvas.drawText(label, x - textPaint.measureText(label) / 2, h - paddingBottom + 30, textPaint);
-        }
-
-        // 画y=0红色参考线在图表中心
-        float centerY = (h - paddingBottom + paddingTop) / 2f;
-        canvas.drawLine(paddingLeft, centerY, w - paddingRight, centerY, zeroLinePaint);
-
-        // 画折线（支持负数）
-        float lastX = 0, lastY = 0;
-        for (int i = 0; i < incomeData.size(); i++) {
-            float x = paddingLeft + (w - paddingLeft - paddingRight) * i / (count - 1);
-            float y = h - paddingBottom - (h - paddingTop - paddingBottom) * (incomeData.get(i) - min) / (max - min);
-            if (i > 0) canvas.drawLine(lastX, lastY, x, y, incomePaint);
-            lastX = x; lastY = y;
         }
     }
 }
