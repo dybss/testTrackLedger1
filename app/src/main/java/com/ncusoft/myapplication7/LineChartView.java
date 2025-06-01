@@ -87,14 +87,30 @@ public class LineChartView extends View {
         // 画y=0红色参考线在中心
         canvas.drawLine(paddingLeft, zeroY, w - paddingRight, zeroY, zeroLinePaint);
 
-        // 画折线（将0映射到中心，正负对称）
+        // 画折线（根据正负切换颜色）
         float valueRange = Math.max(Math.abs(max), Math.abs(min));
         float displayMin = -valueRange, displayMax = valueRange;
         float lastX = 0, lastY = 0; // 修正：声明lastX/lastY
         for (int i = 0; i < incomeData.size(); i++) {
             float x = paddingLeft + (w - paddingLeft - paddingRight) * i / (count - 1);
             float y = zeroY - (h - paddingTop - paddingBottom) / 2 * (incomeData.get(i) / valueRange);
-            if (i > 0) canvas.drawLine(lastX, lastY, x, y, incomePaint);
+            if (i > 0) {
+                // 判断两点的符号，分段变色
+                float v1 = incomeData.get(i - 1);
+                float v2 = incomeData.get(i);
+                Paint paint = (v1 >= 0 && v2 >= 0) ? incomePaint : (v1 < 0 && v2 < 0) ? expensePaint : null;
+                if (paint != null) {
+                    canvas.drawLine(lastX, lastY, x, y, paint);
+                } else {
+                    // 跨越0，分两段画
+                    float zeroX1 = lastX + (x - lastX) * (v1 / (v1 - v2));
+                    float zeroY1 = zeroY;
+                    // 先画v1到0
+                    canvas.drawLine(lastX, lastY, zeroX1, zeroY1, v1 >= 0 ? incomePaint : expensePaint);
+                    // 再画0到v2
+                    canvas.drawLine(zeroX1, zeroY1, x, y, v2 >= 0 ? incomePaint : expensePaint);
+                }
+            }
             lastX = x; lastY = y;
         }
 

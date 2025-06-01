@@ -11,7 +11,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,7 +30,7 @@ import android.graphics.Paint;
 public class MyFragment extends Fragment {
     private TextView usernameText;
     private EditText etNewUsername, etNewPassword, etConfirmPassword;
-    private Button btnSaveProfile, btnEditProfile;
+    private Button btnSaveProfile;
     private ImageView avatarImageView;
     private int userId = -1;
     private static final int REQUEST_CODE_PICK_IMAGE = 1001;
@@ -41,7 +45,6 @@ public class MyFragment extends Fragment {
         etNewPassword = view.findViewById(R.id.et_new_password);
         etConfirmPassword = view.findViewById(R.id.et_confirm_password); // 新增
         btnSaveProfile = view.findViewById(R.id.btn_save_profile);
-        btnEditProfile = view.findViewById(R.id.btn_edit_profile);
         avatarImageView = view.findViewById(R.id.avatar); // 用原有id，兼容布局
 
         // 优先从SharedPreferences获取userId和用户名
@@ -74,13 +77,6 @@ public class MyFragment extends Fragment {
                 }
             }
             updateProfile(newUsername, newPassword);
-        });
-
-        btnEditProfile.setOnClickListener(v -> {
-            etNewUsername.setVisibility(View.VISIBLE);
-            etNewPassword.setVisibility(View.VISIBLE);
-            etConfirmPassword.setVisibility(View.VISIBLE); // 新增
-            btnSaveProfile.setVisibility(View.VISIBLE);
         });
 
         // 在 onCreateView 里设置头像点击事件

@@ -74,15 +74,5 @@
             android:textColor="@android:color/white"
             android:layout_marginBottom="12dp"
             android:background="@drawable/bg_btn_rounded"/>
-
-        <Button
-            android:id="@+id/btn_edit_profile"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="编辑个人信息:"
-            android:textSize="16sp"
-            android:backgroundTint="#90CAF9"
-            android:textColor="#1976D2"
-            android:background="@drawable/bg_btn_rounded"/>
     </LinearLayout>
 </ScrollView>
