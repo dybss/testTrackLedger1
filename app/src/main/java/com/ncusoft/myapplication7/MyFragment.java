@@ -16,18 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import android.graphics.Paint;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class MyFragment extends Fragment {
+public class MyFragment extends androidx.fragment.app.Fragment {
     private TextView usernameText;
     private EditText etNewUsername, etNewPassword, etConfirmPassword;
     private Button btnSaveProfile;
@@ -35,9 +31,8 @@ public class MyFragment extends Fragment {
     private int userId = -1;
     private static final int REQUEST_CODE_PICK_IMAGE = 1001;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
 
         usernameText = view.findViewById(R.id.username_text);
