@@ -9,4 +9,8 @@
         android:id="@+id/action_switch_account"
         android:title="切换账号"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_About"
+        android:title="关于"
+        app:showAsAction="never" />
 </menu>

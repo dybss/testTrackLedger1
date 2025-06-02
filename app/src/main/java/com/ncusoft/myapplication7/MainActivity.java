@@ -92,7 +92,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
             return true;
+        } else if (id == R.id.action_About) {
+            startActivity(new Intent(this, AboutInfoActivity.class));
+            return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

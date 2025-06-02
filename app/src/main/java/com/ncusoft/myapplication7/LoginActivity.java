@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -30,6 +31,18 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
         btnRegister = findViewById(R.id.btn_register);
+
+        // 设置App名称和版本信息
+        TextView tvAppInfo = findViewById(R.id.tv_app_info);
+        String versionName = "";
+        try {
+            versionName = getPackageManager()
+                .getPackageInfo(getPackageName(), 0).versionName;
+        } catch (Exception e) {
+            versionName = "";
+        }
+        String appInfo = getString(R.string.app_name) + " v" + versionName;
+        tvAppInfo.setText(appInfo);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

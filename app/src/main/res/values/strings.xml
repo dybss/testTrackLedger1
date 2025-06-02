@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application7</string>
+    <string name="app_name">Bookkeeping</string>
     <string name="toolbar_title">收支记录</string>
     <string name="func_gallery">11</string>
     <string name="agree_terms">我已阅读   <u>协议内容</u></string>
@@ -32,4 +32,17 @@
     <string name="cnewpassword">确认新密码</string>
     <string name="bcxg">保存修改</string>
     <string name="daynoo">当天没有交易记录</string>
+    <string name="app_info_placeholder">appname v1.0</string>
+    <string name="xx">这款应用专为个人财务管理精心打造，界面简约直观，功能却十分强大。它采用了现代化的 UI 设计风格，底部导航栏让您可以轻松在不同功能模块间自由切换。
+
+在功能方面，它为您提供了全方位的财务管理体验。您可以便捷地添加各类收支记录，无论是日常消费还是意外收入都能快速记录下来。同时，您还能对这些记录进行搜索，让您随时找到需要的信息。
+
+应用的统计分析功能也相当出色，它能根据您选择的年份和月份，以直观的图表形式展示您的交易统计情况，让您清晰了解自己的收支状况。
+
+日历视图则为您提供了按日期查看交易记录的方式，您可以通过日历轻松选择特定日期，查看当天的详细交易情况。
+
+个人信息管理功能也十分完善，您可以随时修改个人信息，如用户名、密码，还能设置个性化的头像，让应用更符合您的使用习惯。
+
+此外，应用还支持退出登录、切换账号等操作，方便您在不同场景下使用。同时，关于页面为您提供了应用版本及开发团队成员信息，让您对应用有更深入的了解。</string>
+
 </resources>
