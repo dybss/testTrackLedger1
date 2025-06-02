@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HttpUtils {
-    private static final String BASE_URL = "http://10.102.119.128:9090";
+    private static final String BASE_URL = "http://10.102.160.33:9090";
 
     public static String sendPostRequest(String api, String jsonBody) throws IOException {
         URL url = new URL(BASE_URL + api);

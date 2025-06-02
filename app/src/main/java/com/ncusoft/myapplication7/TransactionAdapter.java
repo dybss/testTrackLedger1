@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ncusoft.myapplication7.Transaction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

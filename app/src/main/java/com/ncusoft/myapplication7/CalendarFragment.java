@@ -1,6 +1,6 @@
 package com.ncusoft.myapplication7;
 
-import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +10,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.ncusoft.myapplication7.TransactionAdapter;
-import com.ncusoft.myapplication7.Transaction;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;

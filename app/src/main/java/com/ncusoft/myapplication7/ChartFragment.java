@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.content.SharedPreferences;
 
