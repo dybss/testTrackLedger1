@@ -144,8 +144,8 @@ public class ChartFragment extends Fragment {
                 } else {
                     // 建议加提示
                     if (getActivity() != null) {
-                        getActivity().runOnUiThread(() -> 
-                            android.widget.Toast.makeText(getContext(), "暂无数据", android.widget.Toast.LENGTH_SHORT).show()
+                        getActivity().runOnUiThread(() ->
+                                android.widget.Toast.makeText(getContext(), "暂无数据", android.widget.Toast.LENGTH_SHORT).show()
                         );
                         // 清空图表
                         lineChart.setDataWithLabels(new ArrayList<>(), new ArrayList<>());
@@ -153,8 +153,8 @@ public class ChartFragment extends Fragment {
                 }
             } catch (Exception e) {
                 if (getActivity() != null) {
-                    getActivity().runOnUiThread(() -> 
-                        android.widget.Toast.makeText(getContext(), "加载图表失败", android.widget.Toast.LENGTH_SHORT).show()
+                    getActivity().runOnUiThread(() ->
+                            android.widget.Toast.makeText(getContext(), "加载图表失败", android.widget.Toast.LENGTH_SHORT).show()
                     );
                     // 清空图表
                     lineChart.setDataWithLabels(new ArrayList<>(), new ArrayList<>());
