@@ -9,4 +9,27 @@
     3. 禁止恶意注册和滥用服务...\n\n
     请仔细阅读以上内容。
 </string>
+    <string name="no_data">暂无数据</string>
+    <string name="load_chart_failed">加载图表失败</string>
+    <string name="whole_year">全年</string>
+    <string name="month_suffix">月</string>
+    <string name="Please_select_date">请选择日期</string>
+    <string name="Login">登录</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="Register">注册</string>
+    <string name="Confirm_password">确认密码</string>
+    <string name="Already">已有账号</string>
+    <string name="Income_expenditure_chart">收支图表</string>
+    <string name="Current_balance">当前余额</string>
+    <string name="income">收入</string>
+    <string name="Expenditure">支出</string>
+    <string name="Searching">搜索</string>
+    <string name="Remarks">备注</string>
+    <string name="Amount">金额</string>
+    <string name="newusername">新用户名</string>
+    <string name="newpassword">新密码</string>
+    <string name="cnewpassword">确认新密码</string>
+    <string name="bcxg">保存修改</string>
+    <string name="daynoo">当天没有交易记录</string>
 </resources>

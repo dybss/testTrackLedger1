@@ -52,9 +52,9 @@ public class ChartFragment extends Fragment {
 
         // 月份
         String[] months = new String[13];
-        months[0] = "全年";
+        months[0] = getString(R.string.whole_year);
         for (int i = 1; i <= 12; i++) {
-            months[i] = i + "月";
+            months[i] = i + getString(R.string.month_suffix);
         }
         ArrayAdapter<String> monthAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, months);
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -133,7 +133,7 @@ public class ChartFragment extends Fragment {
                         }
                         for (int i = 0; i < xCount; i++) {
                             yList.add(monthAmount[i]);
-                            xLabels.add((i + 1) + "月");
+                            xLabels.add((i + 1) + getString(R.string.month_suffix));
                         }
                     }
                     if (getActivity() != null) {
@@ -144,8 +144,8 @@ public class ChartFragment extends Fragment {
                 } else {
                     // 建议加提示
                     if (getActivity() != null) {
-                        getActivity().runOnUiThread(() ->
-                                android.widget.Toast.makeText(getContext(), "暂无数据", android.widget.Toast.LENGTH_SHORT).show()
+                        getActivity().runOnUiThread(() -> 
+                            android.widget.Toast.makeText(getContext(), getString(R.string.no_data), android.widget.Toast.LENGTH_SHORT).show()
                         );
                         // 清空图表
                         lineChart.setDataWithLabels(new ArrayList<>(), new ArrayList<>());
@@ -153,8 +153,8 @@ public class ChartFragment extends Fragment {
                 }
             } catch (Exception e) {
                 if (getActivity() != null) {
-                    getActivity().runOnUiThread(() ->
-                            android.widget.Toast.makeText(getContext(), "加载图表失败", android.widget.Toast.LENGTH_SHORT).show()
+                    getActivity().runOnUiThread(() -> 
+                        android.widget.Toast.makeText(getContext(), getString(R.string.load_chart_failed), android.widget.Toast.LENGTH_SHORT).show()
                     );
                     // 清空图表
                     lineChart.setDataWithLabels(new ArrayList<>(), new ArrayList<>());
