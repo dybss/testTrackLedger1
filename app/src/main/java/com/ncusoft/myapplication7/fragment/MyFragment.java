@@ -1,4 +1,4 @@
-package com.ncusoft.myapplication7;
+package com.ncusoft.myapplication7.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ncusoft.myapplication7.R;
+import com.ncusoft.myapplication7.utils.HttpUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.ncusoft.myapplication7;
+package com.ncusoft.myapplication7.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +12,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ncusoft.myapplication7.R;
+import com.ncusoft.myapplication7.Transaction;
+import com.ncusoft.myapplication7.TransactionAdapter;
+import com.ncusoft.myapplication7.utils.HttpUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;

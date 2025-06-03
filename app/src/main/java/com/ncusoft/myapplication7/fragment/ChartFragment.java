@@ -1,4 +1,4 @@
-package com.ncusoft.myapplication7;
+package com.ncusoft.myapplication7.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import android.widget.ArrayAdapter;
 import android.content.SharedPreferences;
+
+import com.ncusoft.myapplication7.LineChartView;
+import com.ncusoft.myapplication7.R;
+import com.ncusoft.myapplication7.utils.HttpUtils;
 
 public class ChartFragment extends Fragment {
     private Spinner spinnerYear, spinnerMonth;

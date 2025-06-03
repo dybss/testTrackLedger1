@@ -1,8 +1,14 @@
-package com.ncusoft.myapplication7;
+package com.ncusoft.myapplication7.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.ncusoft.myapplication7.fragment.CalendarFragment;
+import com.ncusoft.myapplication7.fragment.ChartFragment;
+import com.ncusoft.myapplication7.fragment.HomeFragment;
+import com.ncusoft.myapplication7.fragment.MyFragment;
+import com.ncusoft.myapplication7.R;
+
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;

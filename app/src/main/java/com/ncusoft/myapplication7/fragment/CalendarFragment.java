@@ -1,4 +1,4 @@
-package com.ncusoft.myapplication7;
+package com.ncusoft.myapplication7.fragment;
 
 
 import android.content.SharedPreferences;
@@ -23,6 +23,11 @@ import java.util.List;
 import java.util.Locale;
 
 import android.widget.CalendarView;
+
+import com.ncusoft.myapplication7.R;
+import com.ncusoft.myapplication7.Transaction;
+import com.ncusoft.myapplication7.TransactionAdapter;
+import com.ncusoft.myapplication7.utils.HttpUtils;
 
 public class CalendarFragment extends Fragment {
     private int userId = -1;

@@ -1,4 +1,4 @@
-package com.ncusoft.myapplication7;
+package com.ncusoft.myapplication7.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.ncusoft.myapplication7.R;
+import com.ncusoft.myapplication7.utils.HttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

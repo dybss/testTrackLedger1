@@ -1,10 +1,12 @@
-package com.ncusoft.myapplication7;
+package com.ncusoft.myapplication7.activity;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.ncusoft.myapplication7.R;
 
 public class AboutInfoActivity extends AppCompatActivity {
     @Override
