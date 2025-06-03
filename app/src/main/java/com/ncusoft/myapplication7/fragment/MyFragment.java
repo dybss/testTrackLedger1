@@ -159,8 +159,18 @@ public class MyFragment extends androidx.fragment.app.Fragment {
                     if (getActivity() != null) {
                         getActivity().runOnUiThread(() -> {
                             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                            if (success && !TextUtils.isEmpty(newUsername)) {
-                                usernameText.setText(newUsername);
+                            if (success) {
+                                if (!TextUtils.isEmpty(newUsername)) {
+                                    usernameText.setText(newUsername);
+                                }
+                                // 清空输入框
+                                etNewUsername.setText("");
+                                etNewPassword.setText("");
+                                etConfirmPassword.setText("");
+                                // 跳转到登录页面重新登录
+                                Intent intent = new Intent(getActivity(), com.ncusoft.myapplication7.activity.LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
                             }
                         });
                     }

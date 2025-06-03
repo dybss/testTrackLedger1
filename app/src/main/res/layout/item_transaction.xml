@@ -18,7 +18,7 @@
             android:id="@+id/transaction_icon"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/select"
+            android:src="@drawable/m"
             android:padding="8dp"
             android:background="@color/primary_light"
             android:layout_marginEnd="12dp"
