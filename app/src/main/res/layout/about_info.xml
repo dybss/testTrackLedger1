@@ -83,7 +83,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="分工：界面设计与实现"
+                    android:text="分工:前端页面设计，如注册，登录，主界面，用户信息界面，以及实验报告撰写"
                     android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
@@ -130,7 +130,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="分工：数据库与逻辑"
+                    android:text="分工:后端和数据库设计开发，同时还包括前端图表制作，日历制作"
                     android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
